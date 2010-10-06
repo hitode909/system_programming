@@ -6,10 +6,10 @@
 #include<readline/history.h>
 
 /* 2-7 */
+int display_ProcessInfo(char *name, char *position);
 int display_ProcessInfo(char *name, char *position) {
-    printf("        I am %s at the %s.\n", name, position);
-    printf("        My user %d\n", getuid());
-    printf("        My ID is %d and the ID of my parent is %d\n", getpid(), getppid());
+    /* 1つのprintfで実装すること，となっていたので，1つのprintfで実装した．このほうが実行速度が速い？ */
+    printf("        I am %s at the %s.\n        My user %d\n        My ID is %d and the ID of my parent is %d\n", name, position, getuid(), getpid(), getppid());
     return 1;
 }
 
