@@ -9,7 +9,7 @@ int main(void){
   int i;
 
   /* set signal handler */
-  if(signal(SIGINT, SIG_IGN)==SIG_ERR){
+  if(signal(SIGINT, SIG_IGN)==SIG_ERR){ /* SIG_IGN = ignore */
     perror("signal");
     exit(EXIT_FAILURE);
   }
@@ -20,7 +20,7 @@ int main(void){
   }
 
   /* reset signal handler */
-  if(signal(SIGINT, SIG_DFL)==SIG_ERR){
+  if(signal(SIGINT, SIG_DFL)==SIG_ERR){ /* SIG_DEF = default */
     perror("signal");
     exit(EXIT_FAILURE);
   }
