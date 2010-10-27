@@ -10,22 +10,15 @@
 
 void handler(int);
 
-void block_sigalrm() {
-   if(sighold(SIGALRM)<0){
-      perror("sighold");
-      exit(EXIT_FAILURE);
-    }
-}
-
-void unblock_sigalrm() {
-  if(sigrelse(SIGALRM)<0){
-    perror("sigrelse");
+int main(void){
+  struct passwd pwbuf, *ptr;
+  char *buf;
+  int len = 3000;
+  buf=malloc(len);
+  if(!buf){
+    perror("malloc");
     exit(EXIT_FAILURE);
   }
-}
-
-int main(void){
-  struct passwd *ptr;
 
   if(signal(SIGALRM, handler)==SIG_ERR){
     perror("signal");
@@ -35,9 +28,7 @@ int main(void){
   alarm(1);
 
   for(;;){
-    block_sigalrm();
-    ptr = getpwnam(TARGET_NAME);
-    if(ptr==NULL){
+    if (getpwnam_r(TARGET_NAME, &pwbuf, buf, len, &ptr) != 0) {
       perror("getpwnam");
       exit(EXIT_FAILURE);
     }
@@ -46,19 +37,26 @@ int main(void){
       printf("return value corrupted! pw_name =%s\n",ptr->pw_name);
       exit(EXIT_FAILURE);
     }
-    unblock_sigalrm();
   }
+  free(buf);
 }
 
 void handler(int signum){
-  struct passwd *ptr;
+  struct passwd pwbuf, *ptr;
+  char *buf;
+  int len = 3000;
+  buf=malloc(len);
+  if(!buf){
+    perror("malloc");
+    exit(EXIT_FAILURE);
+  }
 
   printf("in signal handler\n");
-  ptr = getpwnam(OTHER_NAME);
-  if(ptr==NULL){
+  if (getpwnam_r(OTHER_NAME, &pwbuf, buf, len, &ptr) != 0) {
     perror("getpwnam");
     exit(EXIT_FAILURE);
   }
+  free(buf);
 
   alarm(1);
 }
