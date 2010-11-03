@@ -7,8 +7,8 @@ unless ARGV.length > 0
 end
 
 ARGV.each{ |url|
-  a, b = *url.scan(/(\d)(\d)/)[0]
-  name = "#{a}-#{b}.c"
+  name = url.split('/').last
+  name.gsub!('html', 'c')
   puts name
   s = Nokogiri open(url)
   open(name, "w"){ |f|
