@@ -16,8 +16,8 @@ int main(void)
     int i, infd, outfd;
 
     /* 入力ファイルを開く */
-    if((infd = open("devices.txt", O_RDONLY)) < 0) {
-	perror("open devices.txt");
+    if((infd = open("rfc959.txt", O_RDONLY)) < 0) {
+	perror("open rfc959.txt");
 	exit(EXIT_FAILURE);
     }
     /* 出力用の一時ファイルを作成する */
@@ -44,4 +44,14 @@ int main(void)
     exit(EXIT_SUCCESS);
 }
 
-      
+/*
+  10バイト表示して90バイト飛ぶ，を10回繰り返す．
+
++R ./a.out
+出力ファイルはtmp8T9qnR
++R cat tmp8T9qnR
+                  J.es RFC: 76ER PROTOCOsfer
+   Prands are i SMNT (StrD
+      (Pe previouscomputer
+ %
+ */
