@@ -51,4 +51,15 @@ void err_quit(char *msg)
     exit(EXIT_FAILURE);
 }
 
-      
+/*
+     void *mmap(void *start, size_t length, int prot, int flags,
+                int fd, off_t offset);
+
+     mmap(NULL, statbuf.st_size, PROT_READ,
+	   MAP_SHARED, fd, 0)
+
+     指定されたfdにoffsetオフセットを取って，length分，メモリにマッピングする．
+     startから始めようとする．
+     protとflagsで，メモリの読み書きの保護の指定をする．
+
+*/
