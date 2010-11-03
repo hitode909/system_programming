@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     }
     mode = buf.st_mode;
     printf("    FILE: %s\n", argv[1]);
-    printf("   INODE: %ld\n", buf.st_ino);
+    printf("   INODE: %lld\n", buf.st_ino);
     printf("  DEVICE: %d,%d\n", major(buf.st_dev),
 	    minor(buf.st_dev));
     printf("    MODE: %#o\n", mode & ~(S_IFMT));
@@ -53,8 +53,8 @@ int main(int argc, char **argv)
     else
 	strcpy(type, "知らないタイプ");
     printf("    TYPE: %s\n", type);
-    printf("    SIZE: %ld\n", buf.st_size);
-    printf("BLK SIZE: %ld\n", buf.st_blksize);
+    printf("    SIZE: %lld\n", buf.st_size);
+    printf("BLK SIZE: %d\n", buf.st_blksize);
     printf("  BLOCKS: %d\n", (int)buf.st_blocks);
     printf("ACCESSED: %s", ctime(&buf.st_atime));
     printf("MODIFIED: %s", ctime(&buf.st_mtime));
