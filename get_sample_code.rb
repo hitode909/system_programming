@@ -1,5 +1,5 @@
 require 'open-uri'
-require 'nokogiri'
+require 'cgi'
 
 unless ARGV.length > 0
   puts "usaga: ruby get_sample_code.rb (urls)"
@@ -10,8 +10,8 @@ ARGV.each{ |url|
   name = url.split('/').last
   name.gsub!('html', 'c')
   puts name
-  s = Nokogiri open(url)
+  s = open(url).read.scan(/<pre>(.*)<\/pre>/m)[0][0]
   open(name, "w"){ |f|
-    f.write s.at('pre').text
+    f.write CGI.unescapeHTML(s)
   }
 }

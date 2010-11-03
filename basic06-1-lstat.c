@@ -23,5 +23,44 @@ int main(int argc, char **argv)
 	exit(EXIT_FAILURE);
     }
 
-    if((lstat(argv[1], &buf)) 
-  
+    if((lstat(argv[1], &buf)) < 0) {
+	perror("lstat");
+	exit(EXIT_FAILURE);
+    }
+    mode = buf.st_mode;
+    printf("    FILE: %s\n", argv[1]);
+    printf("   INODE: %ld\n", buf.st_ino);
+    printf("  DEVICE: %d,%d\n", major(buf.st_dev),
+	    minor(buf.st_dev));
+    printf("    MODE: %#o\n", mode & ~(S_IFMT));
+    printf("   LINKS: %d\n", buf.st_nlink);
+    printf("     UID: %d\n", buf.st_uid);
+    printf("     GID: %d\n", buf.st_gid);
+    if(S_ISLNK(mode))
+	strcpy(type, "シンボリックリンク");
+    else if(S_ISREG(mode))
+	strcpy(type, "通常ファイル");
+    else if(S_ISDIR(mode))
+	strcpy(type, "ディレクトリ");
+    else if(S_ISCHR(mode))
+	strcpy(type, "キャラクタデバイス");
+    else if(S_ISBLK(mode))
+	strcpy(type, "ブロックデバイス");
+    else if(S_ISFIFO(mode))
+	strcpy(type, "FIFO");
+    else if(S_ISSOCK(mode))
+	strcpy(type, "ソケット");
+    else
+	strcpy(type, "知らないタイプ");
+    printf("    TYPE: %s\n", type);
+    printf("    SIZE: %ld\n", buf.st_size);
+    printf("BLK SIZE: %ld\n", buf.st_blksize);
+    printf("  BLOCKS: %d\n", (int)buf.st_blocks);
+    printf("ACCESSED: %s", ctime(&buf.st_atime));
+    printf("MODIFIED: %s", ctime(&buf.st_mtime));
+    printf(" CHANGED: %s", ctime(&buf.st_ctime));
+
+    exit(EXIT_SUCCESS);
+}
+
+      

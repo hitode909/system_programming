@@ -10,5 +10,13 @@
 
 int main(int argc, char *argv[])
 {
-    if(chdir(argv[1]) 
-  
+    if(chdir(argv[1]) < 0) {
+	perror("chdir");
+	exit(EXIT_FAILURE);
+    }
+    system("ls");
+
+    exit(EXIT_SUCCESS);
+}
+
+      

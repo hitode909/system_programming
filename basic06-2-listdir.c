@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     int i = 1;
 
     if(argc != 2) {
-	puts("USAGE: basic06-2-listdir ");
+	puts("USAGE: basic06-2-listdir <パス名>");
 	exit(EXIT_FAILURE);
     }
 

@@ -16,5 +16,20 @@ int main(void)
     int fd;
 
     /* ファイルを作成 */
-    if((fd = open("empty.file", O_CREAT, 0644)) 
-  
+    if((fd = open("empty.file", O_CREAT, 0644)) < 0) {
+	perror("open");
+	exit(EXIT_FAILURE);
+    }
+    /* lsでファイルをリストする */
+    system("ls -l empty.file");
+    /* そのファイルのパーミッションを変更する */
+    if((fchmod(fd, mode)) < 0) {
+	perror("fchmod");
+	exit(EXIT_FAILURE);
+    }
+    /* もう1度ファイルをlsする */
+    system("ls -l empty.file");
+    exit(EXIT_SUCCESS);
+}
+
+      
