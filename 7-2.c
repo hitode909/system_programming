@@ -66,14 +66,11 @@ int main(void)
 
   while (1) {
     c = getchar();
-    if (c == 0x04) {	/* ^D */
+    if (c == 'q') {	/* ^D */
       break;
     }
     if (isascii(c) && isprint(c)) {
       printf("Input = \'%c\' (printable, code = %02x)\n", c, c);
-      if (c == 'q') {
-        break;
-      }
     } else{
       printf("Input code = %02x (unprintable)\n",c);
     }
