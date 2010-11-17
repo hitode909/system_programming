@@ -36,4 +36,4 @@ int main(void){
 	exit(EXIT_SUCCESS);
 }
 
-      
+/* 0(標準入力)からbufにreadして，fdoutにwrite */

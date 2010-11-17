@@ -33,4 +33,4 @@ int main(void){
 	exit(EXIT_SUCCESS);
 }
 
-      
+/* bufから1(標準出力にwriteする) */
