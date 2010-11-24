@@ -27,4 +27,17 @@ int main(void){
 	exit(EXIT_SUCCESS);
 }
 
-      
+/*
+  lockされてるとき，更にlockしようとすると，他の端末でunlockするまでblockされる
+
+  make   lock               unlock  unlock   del
+              lock---(block)------
+
+  lockするとき，1ひく
+  sop.sem_op = -1;
+  unlockするとき，1たす
+  sop.sem_op = 1;
+
+  semopで操作 semid, sops = sembufの配列, nsop = sopsの数
+  semop(semid, &sop, nsop)
+*/

@@ -21,4 +21,42 @@ int main(void){
 	exit(EXIT_SUCCESS);
 }
 
-      
+/*
+プログラムが出力する数字は共有メモリ識別子
+
+% ipcs
+IPC status from <running system> as of Wed Nov 24 13:14:38 JST 2010
+T     ID     KEY        MODE       OWNER    GROUP
+Message Queues:T     ID     KEY        MODE       OWNER    GROUPShared Memory:
+
+T     ID     KEY        MODE       OWNER    GROUP
+Semaphores:
+
+% ./9-1make
+shared memory created: 131073, 32byte
+% ipcs                                                                                                                                                                        [fkd@cyborg44.fse.cs.ritsumei.ac.jp:~/co/system_programming]
+IPC status from <running system> as of Wed Nov 24 13:14:43 JST 2010
+T     ID     KEY        MODE       OWNER    GROUP
+Message Queues:
+
+T     ID     KEY        MODE       OWNER    GROUP
+Shared Memory:
+m 131073 0x00000000 --rw-rw-rw-      fkd    staff
+
+T     ID     KEY        MODE       OWNER    GROUP
+Semaphores:
+
+% ./9-1del 131073
+shared memory deleted: 131073
+% ipcs                                                                                                                                                                        [fkd@cyborg44.fse.cs.ritsumei.ac.jp:~/co/system_programming]
+IPC status from <running system> as of Wed Nov 24 13:14:51 JST 2010
+T     ID     KEY        MODE       OWNER    GROUP
+Message Queues:
+
+T     ID     KEY        MODE       OWNER    GROUP
+Shared Memory:
+
+T     ID     KEY        MODE       OWNER    GROUP
+Semaphores:
+
+ */

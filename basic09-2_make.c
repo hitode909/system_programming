@@ -37,4 +37,22 @@ int main(int argc, char *argv[]){
 	exit(EXIT_SUCCESS);
 }
 
-      
+/*
+% ./mak
+created queue id =65536
+queue id =65536
+% ./snd 65536
+Message posted: Message from 8442
+% ./snd 65536
+Message posted: Message from 8443
+% ./snd 65537
+msgsnd: Invalid argument
+% ./rcv 65536
+Message received: Message from 8442�
+% ./rcv 65536
+Message received: Message from 8443NSDist
+% ./rcv 65536
+msgsnd: No message of desired type
+% ./del 65536
+deleted queue id = 65536
+*/
