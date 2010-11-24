@@ -37,7 +37,7 @@ int StdinRaw(int flag)
     */
 
     tio.c_cc[VMIN] = 0;	 /* 受信するべき文字の最小数 */
-    tio.c_cc[VTIME] = 100;	/* バーストで短期のデータ伝送をタイムアウトするために使用する0.10秒単位のタイマ */
+    tio.c_cc[VTIME] = 10;	/* バーストで短期のデータ伝送をタイムアウトするために使用する0.10秒単位のタイマ */
 
     if (tcsetattr(0, TCSANOW, &tio) == -1){
       perror("tcsetattr");
@@ -54,39 +54,24 @@ int StdinRaw(int flag)
   }
 }
 
-int timer = 10;
-
-void prompt(int signum){
-  printf("%c%d> ", 0x0d, timer);
-  if (timer == 0) exit(EXIT_SUCCESS);
-  timer--;
-  alarm(1);
-}
-
 
 int main(void)
 {
   int c;
 
-  StdinRaw(1);
-  setbuf(stdout, NULL);
-
-  if(signal(SIGALRM, prompt)==SIG_ERR) {
-    perror("signal");
-    exit(EXIT_FAILURE);
-  }
-
-  prompt(0);
-
-  while (1) {
+  int i;
+  for (i = 10; i > 0; i--) {
+    printf("%d> ", i);
+    StdinRaw(1);
+    setbuf(stdout, NULL);
     c = getchar();
-    if (c == EOF) {
+    StdinRaw(0);
+    if (c != EOF) {
+      i = 11;
+    }
+    if (i == 0 && c == EOF) {
       break;
     }
-    if (c == 0x04) {	/* ^D */
-      break;
-    }
-    timer = 10;
   }
   StdinRaw(0);
 
