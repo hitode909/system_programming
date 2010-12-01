@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[]){
 	int shmid;	/* 共有メモリ識別子 */
-	struct shmid_ds shminfo;	/* 共有メモリの情報 */
+        //	struct shmid_ds shminfo;	/* 共有メモリの情報 */
 	int bufsz;	/* メモリセグメントのサイズ */
 	char *shmaddr;	/* 共有メモリのアドレス */
 	char c;	/* 読み込んだ文字 */
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
 	printf("write: ");
 	for(i=0; i<bufsz; i++){
 		*(shmaddr+i) = 'a';
-		putc(c,stdout);
+		putc(*(shmaddr+i),stdout);
 	}
 	printf("\n");
 
