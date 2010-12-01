@@ -4,7 +4,7 @@
 #include <sys/shm.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define BUFSZ 32	/* 共有メモリのサイズ */
+#define BUFSZ 200	/* 共有メモリのサイズ */
 
 int main(void){
 	int shmid;	/* 共有メモリ識別子 */
