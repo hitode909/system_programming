@@ -49,4 +49,16 @@ void err_quit(const char *msg){
 }
 
 
-      
+/*
+プログラムbasc10-1.cを実行し，アドレスのバインドに成功した場合，指定したパスの特殊ファイルが生成されることを確認せよ．
+% ./101 hello
+% ls -l | grep hello
+srwxr-xr-x  1 fkd  staff       0 Dec  1 13:21 hello
+
+また，同一パスの特殊ファイルが既に存在する場合，バインドに失敗することを確認せよ．
+% ./101 hello
+bind: Address already in use
+% rm hello
+% ./101 hello
+%
+ */

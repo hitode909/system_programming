@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
+#include <string.h>
 
 void err_quit(const char*);
 
@@ -60,4 +61,12 @@ void err_quit(const char *msg){
 	exit(EXIT_FAILURE);
 }
 
-      
+
+/*
+
+Proto RefCnt Flags       Type       State         I-Node PID/Program name    Path
+unix  2      [ ACC ]     STREAM     LISTENING     1612749 12124/a.out         hello
+
+State = LISTENINGになった
+
+*/
