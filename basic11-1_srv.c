@@ -52,6 +52,7 @@ int main(void){
 	/* 接続を受け付ける */
 	while((infd=accept(sockfd, (struct sockaddr *)&srv, &socklen))>=0){
 		puts("new connection granted");
+                sleep(3000);
 		close(infd);	/* 接続をクローズ */
 	}
 

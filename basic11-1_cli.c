@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 		err_quit("connect");
 	}
 	printf("connected to socket.\n");
-        sleep(3000);
+        sleep(3000);            /* クライアントプログラム内で，すぐにプログラムが終了しない工夫をしているか */
 
 	/* 接続をクローズ */
 	close(sockfd);
@@ -72,8 +72,7 @@ Proto Recv-Q Send-Q Local Address           Foreign Address         State       
 tcp        0      0 *:50000                 *:*                     LISTEN      9412/srv
 
 % netstat --tcp --all --program | grep 50000
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-tcp        0      0 *:50000                 *:*                     LISTEN      9412/srv
-tcp        1      0 localhost.localdo:60952 localhost.localdo:50000 CLOSE_WAIT  9446/cli
-tcp        0      0 localhost.localdo:50000 localhost.localdo:60952 FIN_WAIT2   -
- */
+tcp        0      0 *:50000                 *:*                     LISTEN      11993/srv
+tcp        0      0 localhost.localdo:33044 localhost.localdo:50000 ESTABLISHED 11995/cli
+tcp        0      0 localhost.localdo:50000 localhost.localdo:33044 ESTABLISHED 11993/srv
+*/
