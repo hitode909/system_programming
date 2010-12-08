@@ -142,3 +142,19 @@ int main(int argc, char *argv[]){
 
   exit(EXIT_SUCCESS);
 }
+
+
+/*
+
+% ./a.out server
+TCP/IP socket available:
+        port 50000
+        addr 0.0.0.0
+new connection granted
+PID = 82463
+
+% ./a.out client 127.0.0.1 50000
+connected to socket.
+sent PID = 82463
+
+ */
