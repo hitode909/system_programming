@@ -18,10 +18,10 @@ int main(void)
   while(num < 100) {
     pthread_mutex_lock(&mutex); /* lock */
     num++;
+    pthread_mutex_unlock(&mutex); /* unlock */
     printf("boss thread: num = %d\n", num);
     fflush(stdout);
     sleep(1);
-    pthread_mutex_unlock(&mutex); /* unlock */
   }
   return(EXIT_FAILURE);
 }
@@ -32,10 +32,10 @@ void *print_number(void *args)
   while(num < 100) {
     pthread_mutex_lock(&mutex); /* lock */
     num++;
+    pthread_mutex_unlock(&mutex); /* unlock */
     printf("worker thread: num = %d\n", num);
     fflush(stdout);
     sleep(2);
-    pthread_mutex_unlock(&mutex); /* unlock */
   }
   return(NULL);
 }
@@ -70,6 +70,7 @@ worker thread: num = 4
 boss thread: num = 5
 worker thread: num = 6
 
-実行時間は差なし
+実行時間は，変更後のほうが短い．
+sleepしてる間，片方のthreadが待つ必要がなくなるため．
 
  */
