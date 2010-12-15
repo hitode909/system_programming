@@ -96,4 +96,14 @@ void do_wrap_up(int one_times, int another_times)
   total = one_times + another_times;
   printf("All done, one thing %d, another %d for a total of %d\n",
 	one_times, another_times, total);
+  printf("r3 = %d\n", r3);
 }
+
+
+/*
+コマンドライン引数に20を与えた場合のr3の最終的な値はどのようになるか．またその理由は．
+
+p  r3 の入力が 2 以上のとき最終的には r3-2．
+do_one_thing, do_another_thing のそれぞれで r3-- されているため．
+
+ */
