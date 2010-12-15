@@ -55,3 +55,29 @@ main(int argc, char **argv)
 
   return 0;
 }
+
+/*
+
+basic12-2aおよびbasic12-2bに対しコマンドライン引数として1, 2, 3それぞれを与えたときの実行結果として表示される数値はどのようになるか．
+
+% gcc -pthread basic12-2a.c
+% ./a.out
+usage: ./a.out [1-3]
+% ./a.out 1
+Thread completed and exit status is -12.
+% ./a.out 2
+Thread completed and exit status is -10.
+% ./a.out 3
+Thread completed and exit status is 1.
+
+% gcc -pthread basic12-2b.c
+% ./a.out
+usage: ./a.out [1-3]
+% ./a.out 1
+Thread completed and exit status is -12.
+% ./a.out 2
+Thread completed and exit status is -10.
+% ./a.out 3
+Thread completed and exit status is 1.
+
+ */
