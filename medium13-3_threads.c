@@ -26,6 +26,8 @@
 #define MIN_REQ_SSIZE 81920
 #define ARRAY_SIZE 10
 
+#define THREADS_MAX 10
+
 typedef int matrix_t[ARRAY_SIZE][ARRAY_SIZE];
 
 typedef struct {
@@ -91,15 +93,14 @@ main(int argc, char **argv)
 			       main thread can join with them. */
   package_t *p;             /* argument list to pass to each thread. */
   
-  unsigned long thread_stack_size;
-  pthread_attr_t *pthread_attr_p, pthread_custom_attr;
+  pthread_attr_t pthread_custom_attr;
 
 
   /* Currently size hardwired to ARRAY_SIZE size */
   size = ARRAY_SIZE;
 
   /* one thread will be created for each element of the matrix. */
-  threads = (pthread_t *)malloc(size*size*sizeof(pthread_t));
+  threads = (pthread_t *)malloc(THREADS_MAX*sizeof(pthread_t));
   
   /* Fill in matrix values, currently values are hardwired */
   for (row = 0; row < size; row++) {
@@ -160,14 +161,16 @@ main(int argc, char **argv)
       printf("MATRIX MAIN THREAD: thread %d created\n", num_threads);
 
       num_threads++;
-      
+
+      if (num_threads == THREADS_MAX) {
+        printf("MATRIX MAIN THREAD: children reached max\n");
+        for (i = 0; i < THREADS_MAX; i++) {
+          pthread_join(threads[i], NULL);
+          printf("MATRIX MAIN THREAD: child %d has joined\n", i);
+        }
+        num_threads = 0;
+      }
     }
-  }
-  
-  /* Synchronize on the completion of the element in each thread. */
-  for (i = 0; i < (size*size); i++) {
-    pthread_join(threads[i], NULL);
-    printf("MATRIX MAIN THREAD: child %d has joined\n", i);
   }
   
 
